@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Tags'
-  s.version          = '0.1.0'
-  s.summary          = 'Dynamic Tag Create, Remove, Input'
+  s.version          = '0.1.1'
+  s.summary          = 'Dynamic Tag Append, Remove, Insert'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,9 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Dynamic Tag Create, remove, input, etc, autolayout use
+  dynamically add, modify, and delete tags, and you can easily change the margins, colors, and fonts of your tags.
+  Tags are not broken because they are linked with Auto Layout.
+  Each time the height of the tag changes, you can bring the height to the delegate
                        DESC
 
   s.homepage         = 'https://github.com/pikachu987/Tags'
