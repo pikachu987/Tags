@@ -36,10 +36,13 @@ pod 'Tags'
 ### Xib or Storyboard file
 
 setting
+
 ![image](./img/example1.png)
+
 ![image](./img/example2.png)
 
 view
+
 ![image](./img/example3.png) 
 ![image](./img/example4.png)
 
