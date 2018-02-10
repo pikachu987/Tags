@@ -1,0 +1,16 @@
+PODS:
+  - Tags (0.1.0)
+
+DEPENDENCIES:
+  - Tags (from `../`)
+
+EXTERNAL SOURCES:
+  Tags:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Tags: 2eccb513fe33de63b6d482aa383d581c0aed8fb1
+
+PODFILE CHECKSUM: a4a6669fdcfb05bbdbd9415e1c50f728984fec19
+
+COCOAPODS: 1.4.0
