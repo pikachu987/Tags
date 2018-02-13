@@ -21,12 +21,17 @@
 
 import UIKit
 
-@objc
 public protocol TagsDelegate: class {
     /// When you touch the button, the function is called.
-    @objc optional func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton)
-    @objc optional func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton)
-    @objc optional func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat)
+    func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton)
+    func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton)
+    func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat)
+}
+
+public extension TagsDelegate {
+    public func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    public func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    public func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat) { }
 }
 
 public class TagDefaultOption {
@@ -509,7 +514,7 @@ public class TagsView: UIView{
             buttonsWidth += width
         }
         
-        self.delegate?.tagsChangeHeight?(self, height: height)
+        self.delegate?.tagsChangeHeight(self, height: height)
     }
     
     
@@ -527,9 +532,9 @@ extension TagsView: TagButtonDelegate{
     /// button touchUpInside Action
     func tagButtonAction(_ tagButton: TagButton, type: TagButtonType) {
         if type == .last || type == .lastCustom{
-            self.delegate?.tagsLastTagAction?(self, tagButton: tagButton)
+            self.delegate?.tagsLastTagAction(self, tagButton: tagButton)
         }else{
-            self.delegate?.tagsTouchAction?(self, tagButton: tagButton)
+            self.delegate?.tagsTouchAction(self, tagButton: tagButton)
         }
     }
 }
