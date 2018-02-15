@@ -38,7 +38,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag AutoLayout Check" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMj-tM-gVl">
-                                                <rect key="frame" x="4" y="246" width="173" height="21"/>
+                                                <rect key="frame" x="4" y="246" width="367" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -47,6 +47,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="HjM-aK-dMT" firstAttribute="leading" secondItem="GfW-3E-een" secondAttribute="leading" id="PWh-rt-w8f"/>
+                                            <constraint firstAttribute="trailing" secondItem="qMj-tM-gVl" secondAttribute="trailing" constant="4" id="Prl-rm-ZgU"/>
                                             <constraint firstAttribute="bottom" secondItem="qMj-tM-gVl" secondAttribute="bottom" constant="4" id="W6B-P1-MW4"/>
                                             <constraint firstItem="HjM-aK-dMT" firstAttribute="top" secondItem="GfW-3E-een" secondAttribute="top" id="X84-SO-8pG"/>
                                             <constraint firstItem="qMj-tM-gVl" firstAttribute="top" secondItem="HjM-aK-dMT" secondAttribute="bottom" constant="4" id="c09-6A-Ap0"/>
@@ -276,6 +277,7 @@
                     <connections>
                         <outlet property="heightLabel" destination="703-xH-ynS" id="ocz-Gf-YyF"/>
                         <outlet property="leadingConstraint" destination="PWh-rt-w8f" id="2FM-We-IPD"/>
+                        <outlet property="tagsLabel" destination="qMj-tM-gVl" id="eJz-ST-yow"/>
                         <outlet property="tagsView" destination="HjM-aK-dMT" id="aDH-a2-Nnn"/>
                         <outlet property="widthSlider" destination="dF6-if-cIW" id="Sav-7L-Kdr"/>
                     </connections>

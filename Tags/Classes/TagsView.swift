@@ -60,7 +60,21 @@ public class TagsView: UIView{
     
     
     // MARK: var
-    private var tagArray = [TagButton]()
+    private var _tagArray = [TagButton]()
+    
+    
+    public var tagArray: [TagButton]{
+        get{
+            return self._tagArray.map({ $0 })
+        }
+    }
+    
+    public var tagTextArray: [String]{
+        get{
+            return self._tagArray.flatMap({ $0.currentTitle })
+        }
+    }
+    
     public var width: CGFloat = UIScreen.main.bounds.width
     private var _height: CGFloat = 0
     public var height: CGFloat{
@@ -103,7 +117,7 @@ public class TagsView: UIView{
     @IBInspectable
     public var tags: String = ""{
         didSet{
-            self.tagArray.removeAll()
+            self._tagArray.removeAll()
             self.append(contentsOf: self.tags.components(separatedBy: ",").filter({ $0 != "" }))
         }
     }
@@ -256,7 +270,7 @@ public class TagsView: UIView{
         button.type = .custom
         button.setEntity()
         button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
-        self.tagArray.append(button)
+        self._tagArray.append(button)
         self.redraw()
         return button
     }
@@ -268,7 +282,7 @@ public class TagsView: UIView{
             button.type = .custom
             button.setEntity()
             button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
-            self.tagArray.append(button)
+            self._tagArray.append(button)
         }
         self.redraw()
     }
@@ -280,7 +294,7 @@ public class TagsView: UIView{
         button.delegate = self
         
         button.setEntity(title: text)
-        self.tagArray.append(button)
+        self._tagArray.append(button)
         self.redraw()
         return button
     }
@@ -291,7 +305,7 @@ public class TagsView: UIView{
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
-            self.tagArray.append(button)
+            self._tagArray.append(button)
         }
         self.redraw()
     }
@@ -303,12 +317,12 @@ public class TagsView: UIView{
     @discardableResult
     public func update(_ button: TagButton, at index: Int) -> TagButton?{
         if index < 0 { return nil }
-        if self.tagArray.count > index{
+        if self._tagArray.count > index{
             button.delegate = self
             button.type = .custom
             button.setEntity()
             button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
-            self.tagArray[index] = button
+            self._tagArray[index] = button
             self.redraw()
             return button
         }
@@ -319,11 +333,11 @@ public class TagsView: UIView{
     @discardableResult
     public func update(_ text: String, at index: Int) -> TagButton?{
         if index < 0 { return nil }
-        if self.tagArray.count > index{
+        if self._tagArray.count > index{
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
-            self.tagArray[index] = button
+            self._tagArray[index] = button
             self.redraw()
             return button
         }
@@ -333,12 +347,12 @@ public class TagsView: UIView{
     /// Insert the TagButton at index
     @discardableResult
     public func insert(_ button: TagButton, at index: Int) -> TagButton{
-        if self.tagArray.count > index{
+        if self._tagArray.count > index{
             button.delegate = self
             button.type = .custom
             button.setEntity()
             button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
-            self.tagArray.insert(button, at: index < 0 ? 0 : index)
+            self._tagArray.insert(button, at: index < 0 ? 0 : index)
             self.redraw()
             return button
         }else{
@@ -349,11 +363,11 @@ public class TagsView: UIView{
     /// Insert the String at index
     @discardableResult
     public func insert(_ text: String, at index: Int) -> TagButton{
-        if self.tagArray.count > index{
+        if self._tagArray.count > index{
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
-            self.tagArray.insert(button, at: index < 0 ? 0 : index)
+            self._tagArray.insert(button, at: index < 0 ? 0 : index)
             self.redraw()
             return button
         }else{
@@ -365,8 +379,8 @@ public class TagsView: UIView{
     @discardableResult
     public func remove(_ index: Int) -> TagButton?{
         if index < 0 { return nil }
-        if self.tagArray.count > index{
-            let item = self.tagArray.remove(at: index)
+        if self._tagArray.count > index{
+            let item = self._tagArray.remove(at: index)
             self.redraw()
             return item
         }
@@ -377,9 +391,9 @@ public class TagsView: UIView{
     /// Remove TagButton
     @discardableResult
     public func remove(_ button: TagButton) -> TagButton?{
-        for (index, element) in self.tagArray.enumerated(){
+        for (index, element) in self._tagArray.enumerated(){
             if element == button{
-                let item = self.tagArray.remove(at: index)
+                let item = self._tagArray.remove(at: index)
                 self.redraw()
                 return item
             }
@@ -391,7 +405,7 @@ public class TagsView: UIView{
     
     /// RemoveAll
     public func removeAll(){
-        self.tagArray.removeAll()
+        self._tagArray.removeAll()
         self.redraw()
     }
     
@@ -408,7 +422,7 @@ public class TagsView: UIView{
     
     /// RemoveAll Constraint
     private func removeAllConstraint(){
-        for element in self.tagArray{
+        for element in self._tagArray{
             element.removeConstraint()
             element.removeFromSuperview()
         }
@@ -439,7 +453,7 @@ public class TagsView: UIView{
         
         self.removeAllConstraint()
         
-        var tagArray = self.tagArray
+        var tagArray = self._tagArray
         if let tagButton = self.lastTagButton{
             tagArray.append(tagButton)
         }

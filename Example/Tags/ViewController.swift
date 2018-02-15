@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var widthSlider: UISlider!
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var heightLabel: UILabel!
+    @IBOutlet private weak var tagsLabel: UILabel!
     
     private var alertController: UIAlertController?
     
@@ -29,12 +30,14 @@ class ViewController: UIViewController {
         self.widthSlider.value = 0
         self.widthSlider.maximumValue = Float(UIScreen.main.bounds.width/2 - 60)
         self.widthSlider.addTarget(self, action: #selector(self.sliderAction(_:)), for: .valueChanged)
+        self.tagsLabel.numberOfLines = 0
+        
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "CustomAdd", style: .plain, target: self, action: #selector(self.tagCustomAction(_:)))
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
         
-        
+        self.makeTagsString()
     }
     
     
@@ -46,6 +49,13 @@ class ViewController: UIViewController {
     }
 
     
+    
+    private func makeTagsString(){
+        self.tagsLabel.text = self.tagsView.tagTextArray
+            .reduce("tags:\n", { (result, str) -> String in
+                return "\(result)\(str),"
+            })
+    }
     
     
     
@@ -69,6 +79,7 @@ class ViewController: UIViewController {
                 tagBackgroundColor: UIColor.white)
             button.setEntity(options)
             self.tagsView.append(button)
+            self.makeTagsString()
         }))
         self.present(alertController, animated: true, completion: nil)
     }
@@ -200,6 +211,7 @@ extension ViewController: TagsDelegate{
             if let textArray = alertController.textFields?.flatMap({ $0.text }).filter({ $0 != ""}){
                 /// append
                 self.tagsView.append(contentsOf: textArray)
+                self.makeTagsString()
             }
         }))
         self.present(alertController, animated: true, completion: nil)
@@ -229,6 +241,7 @@ extension ViewController: TagsDelegate{
                 }
                 /// Update
                 tagsView.update(text, at: tagButton.index)
+                self.makeTagsString()
             }))
             self.present(alertController, animated: true, completion: nil)
             
@@ -246,6 +259,7 @@ extension ViewController: TagsDelegate{
                 }
                 /// Insert
                 tagsView.insert(text, at: tagButton.index)
+                self.makeTagsString()
             }))
             self.present(alertController, animated: true, completion: nil)
         }))
@@ -262,6 +276,7 @@ extension ViewController: TagsDelegate{
                 }
                 /// Insert
                 tagsView.insert(text, at: tagButton.index + 1)
+                self.makeTagsString()
             }))
             self.present(alertController, animated: true, completion: nil)
         }))
@@ -270,6 +285,7 @@ extension ViewController: TagsDelegate{
         alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
             /// Remove
             tagsView.remove(tagButton)
+            self.makeTagsString()
         }))
         
         self.present(alertController, animated: true, completion: nil)
