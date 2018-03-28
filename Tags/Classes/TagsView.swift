@@ -90,13 +90,16 @@ public class TagsView: UIView{
     // MARK: Initializers
     public override func awakeFromNib() {
         super.awakeFromNib()
+        
         self.width = self.frame.width
         self.clipsToBounds = true
+        
+        self.redraw()
     }
     
     
     public override var intrinsicContentSize: CGSize{
-        return CGSize(width: self.width, height: 160)
+        return CGSize(width: self.width, height: 0)
     }
     
     
@@ -405,6 +408,13 @@ public class TagsView: UIView{
     
     /// RemoveAll
     public func removeAll(){
+        for element in self._tagArray{
+            element.removeConstraint()
+            element.removeFromSuperview()
+        }
+        self.lastTagButton?.removeConstraint()
+        self.lastTagButton?.removeFromSuperview()
+        self.removeConstraints(self.constraints)
         self._tagArray.removeAll()
         self.redraw()
     }
@@ -452,6 +462,13 @@ public class TagsView: UIView{
         var buttonsWidth: CGFloat = 0
         
         self.removeAllConstraint()
+        
+        if self._tagArray.isEmpty && self.lastTag == nil{
+            self._height = 0
+            self.delegate?.tagsChangeHeight(self, height: 0)
+            self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0))
+            return
+        }
         
         var tagArray = self._tagArray
         if let tagButton = self.lastTagButton{

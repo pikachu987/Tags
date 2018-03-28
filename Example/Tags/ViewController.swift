@@ -38,6 +38,32 @@ class ViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
         
         self.makeTagsString()
+        
+        
+        
+//
+//        self.tagsView.lastTag = nil
+//        self.tagsView.removeAll()
+//        self.tagsLabel.text = self.tagsView.tagTextArray
+//            .reduce("tags:\n", { (result, str) -> String in
+//                return "\(result)\(str),"
+//            })
+//
+//        /// Append
+//        let button = TagButton()
+//        button.setTitle("HI", for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.setImage(UIImage(named: "icTagRemove")?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        let options = ButtonOptions(
+//            layerColor: UIColor.brown,
+//            layerRadius: 10,
+//            layerWidth: 2,
+//            tagTitleColor: UIColor(white: 89/255, alpha: 1),
+//            tagFont: UIFont.boldSystemFont(ofSize: 15),
+//            tagBackgroundColor: UIColor.black)
+//        button.setEntity(options)
+//        self.tagsView.append(button)
+//        self.makeTagsString()
     }
     
     
