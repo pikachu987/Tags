@@ -71,7 +71,7 @@ public class TagsView: UIView{
     
     public var tagTextArray: [String]{
         get{
-            return self._tagArray.flatMap({ $0.currentTitle })
+            return self._tagArray.compactMap({ $0.currentTitle })
         }
     }
     
