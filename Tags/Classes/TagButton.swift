@@ -90,6 +90,8 @@ public class TagButton: UIButton{
     
     weak var delegate: TagButtonDelegate?
     public var index: Int = 0
+    public var key: Int = 0
+    public var keyString: String = ""
     
     var type: TagButtonType = .default
     
