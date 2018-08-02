@@ -20,8 +20,8 @@
 
 import UIKit
 
-extension UIView{
-    func leadingConstraint(_ item: UIView, attribute: NSLayoutAttribute, constant: CGFloat) -> NSLayoutConstraint{
+extension UIView {
+    func leadingConstraint(_ item: UIView, attribute: NSLayoutAttribute, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: attribute,
@@ -33,7 +33,7 @@ extension UIView{
         )
     }
     
-    func trailingConstraint(_ item: UIView, constant: CGFloat) -> NSLayoutConstraint{
+    func trailingConstraint(_ item: UIView, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: .trailing,
@@ -45,7 +45,7 @@ extension UIView{
         )
     }
     
-    func topConstraint(_ item: UIView, attribute: NSLayoutAttribute, constant: CGFloat) -> NSLayoutConstraint{
+    func topConstraint(_ item: UIView, attribute: NSLayoutAttribute, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: attribute,
@@ -57,7 +57,7 @@ extension UIView{
         )
     }
     
-    func bottomConstraint(_ item: UIView, constant: CGFloat) -> NSLayoutConstraint{
+    func bottomConstraint(_ item: UIView, constant: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: item,
             attribute: .bottom,

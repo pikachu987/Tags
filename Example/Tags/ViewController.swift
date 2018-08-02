@@ -76,7 +76,7 @@ class ViewController: UIViewController {
 
     
     
-    private func makeTagsString(){
+    private func makeTagsString() {
         self.tagsLabel.text = self.tagsView.tagTextArray
             .reduce("tags:\n", { (result, str) -> String in
                 return "\(result)\(str),"
@@ -85,12 +85,12 @@ class ViewController: UIViewController {
     
     
     
-    @objc private func tagCustomAction(_ sender: UIBarButtonItem){
+    @objc private func tagCustomAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Custom Tag", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: { (textField) in })
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Append", style: .default, handler: { (_) in
-            guard let text = alertController.textFields?.first?.text, text.count != 0 else{
+            guard let text = alertController.textFields?.first?.text, text.count != 0 else {
                 return
             }
             /// Append
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    @objc private func lastBarButtonAction(_ sender: UIBarButtonItem){
+    @objc private func lastBarButtonAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -146,7 +146,7 @@ class ViewController: UIViewController {
     
     
     
-    @objc private func sliderAction(_ sender: UISlider){
+    @objc private func sliderAction(_ sender: UISlider) {
         self.leadingConstraint.constant = CGFloat(sender.value)
         self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint.constant*2)
         
@@ -234,7 +234,7 @@ extension ViewController: TagsDelegate{
         })
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Append", style: .default, handler: { (_) in
-            if let textArray = alertController.textFields?.flatMap({ $0.text }).filter({ $0 != ""}){
+            if let textArray = alertController.textFields?.compactMap({ $0.text }).filter({ $0 != ""}) {
                 /// append
                 self.tagsView.append(contentsOf: textArray)
                 self.makeTagsString()
@@ -262,7 +262,7 @@ extension ViewController: TagsDelegate{
             })
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alertController.addAction(UIAlertAction(title: "Update", style: .default, handler: { (_) in
-                guard let text = alertController.textFields?.first?.text, text.count != 0 else{
+                guard let text = alertController.textFields?.first?.text, text.count != 0 else {
                     return
                 }
                 /// Update
@@ -280,7 +280,7 @@ extension ViewController: TagsDelegate{
             alertController.addTextField(configurationHandler: { (textField) in })
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alertController.addAction(UIAlertAction(title: "Insert", style: .default, handler: { (_) in
-                guard let text = alertController.textFields?.first?.text, text.count != 0 else{
+                guard let text = alertController.textFields?.first?.text, text.count != 0 else {
                     return
                 }
                 /// Insert
@@ -297,7 +297,7 @@ extension ViewController: TagsDelegate{
             alertController.addTextField(configurationHandler: { (textField) in })
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alertController.addAction(UIAlertAction(title: "Insert", style: .default, handler: { (_) in
-                guard let text = alertController.textFields?.first?.text, text.count != 0 else{
+                guard let text = alertController.textFields?.first?.text, text.count != 0 else {
                     return
                 }
                 /// Insert
@@ -331,7 +331,7 @@ extension ViewController: TagsDelegate{
 
 extension ViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let alertController = self.alertController{
+        if let alertController = self.alertController {
             alertController.addTextField(configurationHandler: { (textField) in
                 textField.returnKeyType = .next
                 textField.delegate = self

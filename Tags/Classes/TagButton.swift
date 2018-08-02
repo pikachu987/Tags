@@ -23,7 +23,7 @@ import UIKit
 
 
 /// Button option
-public struct ButtonOptions{
+public struct ButtonOptions {
     public var paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight
     public var paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom
     public var layerColor: UIColor
@@ -81,11 +81,11 @@ protocol TagButtonDelegate: class {
 }
 
 /// Button Type
-enum TagButtonType{
+enum TagButtonType {
     case custom, `default`, last, lastCustom
 }
 
-public class TagButton: UIButton{
+public class TagButton: UIButton {
     // MARK: var
     
     weak var delegate: TagButtonDelegate?
@@ -96,7 +96,7 @@ public class TagButton: UIButton{
     var type: TagButtonType = .default
     
     /// button Size
-    var size: CGSize{
+    var size: CGSize {
         var size = self.titleLabel?.attributedText?.size() ?? .zero
         size.width = ceil(size.width)
         size.height = ceil(size.height)
@@ -110,13 +110,13 @@ public class TagButton: UIButton{
     //MARK: func
     
     /// Set an option.
-    public func setEntity(_ options: ButtonOptions){
+    public func setEntity(_ options: ButtonOptions) {
         self.setEntity()
         self.setEntityOptions(options: options)
     }
     
     /// module private set options
-    func setEntityOptions(options: ButtonOptions){
+    func setEntityOptions(options: ButtonOptions) {
         self.contentEdgeInsets = UIEdgeInsetsMake(options.paddingTopBottom, options.paddingLeftRight, options.paddingTopBottom, options.paddingLeftRight)
         self.layer.borderColor = options.layerColor.cgColor
         self.layer.borderWidth = options.layerWidth
@@ -129,19 +129,19 @@ public class TagButton: UIButton{
     
     
     /// padding set
-    func setEntity(paddingLeftRight: CGFloat, paddingTopBottom: CGFloat){
+    func setEntity(paddingLeftRight: CGFloat, paddingTopBottom: CGFloat) {
         self.contentEdgeInsets = UIEdgeInsetsMake(paddingTopBottom, paddingLeftRight, paddingTopBottom, paddingLeftRight)
     }
     
     
     /// set title.
-    func setEntity(title: String){
+    func setEntity(title: String) {
         self.setTitle(title, for: .normal)
         self.setEntity()
     }
     
     /// set default
-    func setEntity(){
+    func setEntity() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.sizeToFit()
         
@@ -151,7 +151,7 @@ public class TagButton: UIButton{
     
     
     /// Add Constraint
-    func addConstraint(){
+    func addConstraint() {
         self.removeConstraint()
         let widthConstraint = NSLayoutConstraint(
             item: self,
@@ -175,13 +175,13 @@ public class TagButton: UIButton{
     }
     
     /// Remove Constraint
-    func removeConstraint(){
+    func removeConstraint() {
         self.removeConstraints(self.constraints)
     }
     
     
     // MARK: action
-    @objc private func touchAction(_ sender: UIButton){
+    @objc private func touchAction(_ sender: UIButton) {
         self.delegate?.tagButtonAction(self, type: self.type)
     }
 }

@@ -53,39 +53,34 @@ public class TagDefaultOption {
 
 
 @IBDesignable
-public class TagsView: UIView{
+public class TagsView: UIView {
     public weak var delegate: TagsDelegate?
-    
-    
-    
     
     // MARK: var
     private var _tagArray = [TagButton]()
     
-    
-    public var tagArray: [TagButton]{
-        get{
+    public var tagArray: [TagButton] {
+        get {
             return self._tagArray.map({ $0 })
         }
     }
     
-    public var tagTextArray: [String]{
-        get{
+    public var tagTextArray: [String] {
+        get {
             return self._tagArray.compactMap({ $0.currentTitle })
         }
     }
     
     public var width: CGFloat = UIScreen.main.bounds.width
     private var _height: CGFloat = 0
-    public var height: CGFloat{
-        get{
+    public var height: CGFloat {
+        get {
             return self._height
         }
     }
     
     /// Always the last button is added.
     private var lastTagButton: TagButton?
-    
     
     // MARK: Initializers
     public override func awakeFromNib() {
@@ -97,18 +92,20 @@ public class TagsView: UIView{
         self.redraw()
     }
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     
-    public override var intrinsicContentSize: CGSize{
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: self.width, height: 0)
     }
     
     
-    
-    
-    
-    
     // MARK: Properties
-    
     
     
     /// LineBreakMode of button
@@ -118,8 +115,8 @@ public class TagsView: UIView{
      The tag is truncated to a ,
      */
     @IBInspectable
-    public var tags: String = ""{
-        didSet{
+    public var tags: String = "" {
+        didSet {
             self._tagArray.removeAll()
             self.append(contentsOf: self.tags.components(separatedBy: ",").filter({ $0 != "" }))
         }
@@ -128,33 +125,32 @@ public class TagsView: UIView{
     
     /// Left and right paddings of the button
     @IBInspectable
-    public var paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight{
-        didSet{
+    public var paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight {
+        didSet {
             self.redraw()
         }
     }
     
     /// Top and bottom paddings of the button
     @IBInspectable
-    public var paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom{
-        didSet{
+    public var paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom {
+        didSet {
             self.redraw()
         }
     }
     
-    
     /// Left and right margins of the button
     @IBInspectable
-    public var marginLeftRight: CGFloat = TagDefaultOption.marginLeftRight{
-        didSet{
+    public var marginLeftRight: CGFloat = TagDefaultOption.marginLeftRight {
+        didSet {
             self.redraw()
         }
     }
     
     /// Top and Bottom margins of the button
     @IBInspectable
-    public var marginTopBottom: CGFloat = TagDefaultOption.marginTopBottom{
-        didSet{
+    public var marginTopBottom: CGFloat = TagDefaultOption.marginTopBottom {
+        didSet {
             self.redraw()
         }
     }
@@ -162,24 +158,24 @@ public class TagsView: UIView{
     
     /// The rounded corner of the button
     @IBInspectable
-    public var tagLayerRadius: CGFloat = TagDefaultOption.tagLayerRadius{
-        didSet{
+    public var tagLayerRadius: CGFloat = TagDefaultOption.tagLayerRadius {
+        didSet {
             self.redraw()
         }
     }
     
     /// The line size of the button
     @IBInspectable
-    public var tagLayerWidth: CGFloat = TagDefaultOption.tagLayerWidth{
-        didSet{
+    public var tagLayerWidth: CGFloat = TagDefaultOption.tagLayerWidth {
+        didSet {
             self.redraw()
         }
     }
     
     /// Color of the button's line
     @IBInspectable
-    public var tagLayerColor: UIColor = TagDefaultOption.tagLayerColor{
-        didSet{
+    public var tagLayerColor: UIColor = TagDefaultOption.tagLayerColor {
+        didSet {
             self.redraw()
         }
     }
@@ -187,40 +183,40 @@ public class TagsView: UIView{
     
     /// The color of the button's text
     @IBInspectable
-    public var tagTitleColor: UIColor = TagDefaultOption.tagTitleColor{
-        didSet{
+    public var tagTitleColor: UIColor = TagDefaultOption.tagTitleColor {
+        didSet {
             self.redraw()
         }
     }
     
     /// Background color of button
     @IBInspectable
-    public var tagBackgroundColor: UIColor = TagDefaultOption.tagBackgroundColor{
-        didSet{
+    public var tagBackgroundColor: UIColor = TagDefaultOption.tagBackgroundColor {
+        didSet {
             self.redraw()
         }
     }
     
     /// Font of button
     @IBInspectable
-    public var tagFont: UIFont = TagDefaultOption.tagFont{
-        didSet{
+    public var tagFont: UIFont = TagDefaultOption.tagFont {
+        didSet {
             self.redraw()
         }
     }
     
     /// Always the last button is added.
     @IBInspectable
-    public var lastTag: String? = nil{
-        didSet{
-            if let text = self.lastTag{
+    public var lastTag: String? = nil {
+        didSet {
+            if let text = self.lastTag {
                 let button = TagButton(type: .system)
                 button.delegate = self
                 button.type = .last
                 button.setEntity(title: text)
                 self.lastTagButton = button
                 self.redraw()
-            }else{
+            } else {
                 self.lastTagButton = nil
                 self.redraw()
             }
@@ -229,46 +225,34 @@ public class TagsView: UIView{
     
     /// The color of the lastTagButton text
     @IBInspectable
-    public var lastTagTitleColor: UIColor = TagDefaultOption.lastTagTitleColor{
-        didSet{
-            if self.lastTag != nil{ self.redraw() }
+    public var lastTagTitleColor: UIColor = TagDefaultOption.lastTagTitleColor {
+        didSet {
+            if self.lastTag != nil { self.redraw() }
         }
     }
     
     /// Color of the lastTagButton line
     @IBInspectable
-    public var lastTagLayerColor: UIColor = TagDefaultOption.lastTagLayerColor{
-        didSet{
-            if self.lastTag != nil{ self.redraw() }
+    public var lastTagLayerColor: UIColor = TagDefaultOption.lastTagLayerColor {
+        didSet {
+            if self.lastTag != nil { self.redraw() }
         }
     }
     
     /// Background color of lastTagButton
     @IBInspectable
-    public var lastTagBackgroundColor: UIColor = TagDefaultOption.lastTagBackgroundColor{
-        didSet{
+    public var lastTagBackgroundColor: UIColor = TagDefaultOption.lastTagBackgroundColor {
+        didSet {
             self.redraw()
         }
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // MARK: func
-    
     
     /// append TagButton
     @discardableResult
-    public func append(_ button: TagButton) -> TagButton{
+    public func append(_ button: TagButton) -> TagButton {
         button.delegate = self
         button.type = .custom
         button.setEntity()
@@ -279,8 +263,8 @@ public class TagsView: UIView{
     }
     
     /// append TagButtons
-    public func append(contentsOf: [TagButton]){
-        for button in contentsOf{
+    public func append(contentsOf: [TagButton]) {
+        for button in contentsOf {
             button.delegate = self
             button.type = .custom
             button.setEntity()
@@ -292,7 +276,7 @@ public class TagsView: UIView{
     
     /// append a String as a TagButton
     @discardableResult
-    public func append(_ text: String) -> TagButton{
+    public func append(_ text: String) -> TagButton {
         let button = TagButton(type: .system)
         button.delegate = self
         
@@ -303,8 +287,8 @@ public class TagsView: UIView{
     }
     
     /// append a Strings as a TagButtons
-    public func append(contentsOf: [String]){
-        for text in contentsOf{
+    public func append(contentsOf: [String]) {
+        for text in contentsOf {
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
@@ -314,13 +298,11 @@ public class TagsView: UIView{
     }
     
     
-    
-    
     /// Change the TagButton at index
     @discardableResult
-    public func update(_ button: TagButton, at index: Int) -> TagButton?{
+    public func update(_ button: TagButton, at index: Int) -> TagButton? {
         if index < 0 { return nil }
-        if self._tagArray.count > index{
+        if self._tagArray.count > index {
             button.delegate = self
             button.type = .custom
             button.setEntity()
@@ -334,9 +316,9 @@ public class TagsView: UIView{
     
     /// Change the String at index
     @discardableResult
-    public func update(_ text: String, at index: Int) -> TagButton?{
+    public func update(_ text: String, at index: Int) -> TagButton? {
         if index < 0 { return nil }
-        if self._tagArray.count > index{
+        if self._tagArray.count > index {
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
@@ -349,8 +331,8 @@ public class TagsView: UIView{
     
     /// Insert the TagButton at index
     @discardableResult
-    public func insert(_ button: TagButton, at index: Int) -> TagButton{
-        if self._tagArray.count > index{
+    public func insert(_ button: TagButton, at index: Int) -> TagButton {
+        if self._tagArray.count > index {
             button.delegate = self
             button.type = .custom
             button.setEntity()
@@ -358,31 +340,31 @@ public class TagsView: UIView{
             self._tagArray.insert(button, at: index < 0 ? 0 : index)
             self.redraw()
             return button
-        }else{
+        } else {
             return self.append(button)
         }
     }
     
     /// Insert the String at index
     @discardableResult
-    public func insert(_ text: String, at index: Int) -> TagButton{
-        if self._tagArray.count > index{
+    public func insert(_ text: String, at index: Int) -> TagButton {
+        if self._tagArray.count > index {
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
             self._tagArray.insert(button, at: index < 0 ? 0 : index)
             self.redraw()
             return button
-        }else{
+        } else {
             return append(text)
         }
     }
     
     /// Remove at index
     @discardableResult
-    public func remove(_ index: Int) -> TagButton?{
+    public func remove(_ index: Int) -> TagButton? {
         if index < 0 { return nil }
-        if self._tagArray.count > index{
+        if self._tagArray.count > index {
             let item = self._tagArray.remove(at: index)
             self.redraw()
             return item
@@ -393,9 +375,9 @@ public class TagsView: UIView{
     
     /// Remove TagButton
     @discardableResult
-    public func remove(_ button: TagButton) -> TagButton?{
-        for (index, element) in self._tagArray.enumerated(){
-            if element == button{
+    public func remove(_ button: TagButton) -> TagButton? {
+        for (index, element) in self._tagArray.enumerated() {
+            if element == button {
                 let item = self._tagArray.remove(at: index)
                 self.redraw()
                 return item
@@ -407,8 +389,8 @@ public class TagsView: UIView{
     
     
     /// RemoveAll
-    public func removeAll(){
-        for element in self._tagArray{
+    public func removeAll() {
+        for element in self._tagArray {
             element.removeConstraint()
             element.removeFromSuperview()
         }
@@ -421,7 +403,7 @@ public class TagsView: UIView{
     
     
     /// Last Custom Button
-    public func lastTagButton(_ button: TagButton){
+    public func lastTagButton(_ button: TagButton) {
         button.delegate = self
         button.type = .lastCustom
         self.lastTagButton = button
@@ -431,8 +413,8 @@ public class TagsView: UIView{
     
     
     /// RemoveAll Constraint
-    private func removeAllConstraint(){
-        for element in self._tagArray{
+    private func removeAllConstraint() {
+        for element in self._tagArray {
             element.removeConstraint()
             element.removeFromSuperview()
         }
@@ -443,27 +425,18 @@ public class TagsView: UIView{
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // MARK: - View updates
     
     
     /// It is called when you add, delete or modify a button.
-    public func redraw(){
+    public func redraw() {
         var topItem: UIView?
         var leftItem: UIView?
         var buttonsWidth: CGFloat = 0
         
         self.removeAllConstraint()
         
-        if self._tagArray.isEmpty && self.lastTag == nil{
+        if self._tagArray.isEmpty && self.lastTag == nil {
             self._height = 0
             self.delegate?.tagsChangeHeight(self, height: 0)
             self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0))
@@ -471,20 +444,20 @@ public class TagsView: UIView{
         }
         
         var tagArray = self._tagArray
-        if let tagButton = self.lastTagButton{
+        if let tagButton = self.lastTagButton {
             tagArray.append(tagButton)
         }
         
         self._height = 0
-        if !tagArray.isEmpty{
+        if !tagArray.isEmpty {
             self._height += self.marginTopBottom + tagArray[0].size.height + self.marginTopBottom
         }
         
         
-        for (index, element) in tagArray.enumerated(){
+        for (index, element) in tagArray.enumerated() {
             self.addSubview(element)
             element.index = index
-            if element.type == .default || element.type == .last{
+            if element.type == .default || element.type == .last {
                 element.setEntityOptions(options: ButtonOptions(
                     paddingLeftRight: self.paddingLeftRight,
                     paddingTopBottom: self.paddingTopBottom,
@@ -496,7 +469,7 @@ public class TagsView: UIView{
                     tagBackgroundColor: element.type == .default ? self.tagBackgroundColor : self.lastTagBackgroundColor,
                     lineBreakMode: self.lineBreakMode
                 ))
-            }else{
+            } else {
                 element.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
             }
             element.addConstraint()
@@ -506,7 +479,7 @@ public class TagsView: UIView{
                 (buttonsWidth == 0 ? self.marginLeftRight : 0)
             
             /// Prev Element Trailing, Next Line
-            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width > 0) ){
+            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width > 0) ) {
                 self.addConstraint(tagArray[index-1].trailingConstraint(
                     self,
                     constant: self.marginLeftRight
@@ -520,17 +493,17 @@ public class TagsView: UIView{
             
             
             
-            self.addConstraint(element.leadingConstraint(
+            self.addConstraint(element.leadingConstraint (
                 leftItem ?? self,
                 attribute: leftItem == nil ? .leading : .trailing,
                 constant: self.marginLeftRight
             ))
-            self.addConstraint(element.topConstraint(
+            self.addConstraint(element.topConstraint (
                 topItem ?? self,
                 attribute: topItem == nil ? .top : .bottom,
                 constant: self.marginTopBottom
             ))
-            if element == tagArray[tagArray.count-1]{
+            if element == tagArray[tagArray.count-1] {
                 self.addConstraint(element.bottomConstraint(
                     self,
                     constant: self.marginTopBottom
@@ -549,20 +522,15 @@ public class TagsView: UIView{
     }
     
     
-    
-    
-    
-    
-    
 }
 
 
-extension TagsView: TagButtonDelegate{
+extension TagsView: TagButtonDelegate {
     // MARK: TagButtonDelegate
     
     /// button touchUpInside Action
     func tagButtonAction(_ tagButton: TagButton, type: TagButtonType) {
-        if type == .last || type == .lastCustom{
+        if type == .last || type == .lastCustom {
             self.delegate?.tagsLastTagAction(self, tagButton: tagButton)
         }else{
             self.delegate?.tagsTouchAction(self, tagButton: tagButton)
