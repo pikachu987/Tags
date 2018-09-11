@@ -1,0 +1,32 @@
+PODS:
+  - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.2.0)
+  - RxTags (0.1.0):
+    - RxCocoa
+    - RxSwift
+    - Tags
+  - Tags (0.1.7)
+
+DEPENDENCIES:
+  - RxTags (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RxCocoa
+    - RxSwift
+    - Tags
+
+EXTERNAL SOURCES:
+  RxTags:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
+  RxTags: b82f681d5c82b1dafd943829f4709ea4538fd467
+  Tags: 997b330a2043f030401341f165577486e07318b6
+
+PODFILE CHECKSUM: 5ab26b302763b63b9829b9c245c190cde46f0175
+
+COCOAPODS: 1.5.3
