@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Tags_Example' do
+  pod 'RxTags', :path => '../'
+
+  target 'Tags_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
