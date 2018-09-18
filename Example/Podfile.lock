@@ -1,16 +1,16 @@
 PODS:
-  - Tags (0.1.0)
+  - Tags (0.1.7)
 
 DEPENDENCIES:
   - Tags (from `../`)
 
 EXTERNAL SOURCES:
   Tags:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Tags: e267d05f3a6ac7d55d4fdf17ff5a4789447b8c96
+  Tags: bbc6ec9b145652c2910e9ba41c834774d7caffae
 
 PODFILE CHECKSUM: a4a6669fdcfb05bbdbd9415e1c50f728984fec19
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

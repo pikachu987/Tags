@@ -1,8 +1,8 @@
 {
   "name": "Tags",
-  "version": "0.1.0",
-  "summary": "Dynamic Tag Create, Remove, Input",
-  "description": "Dynamic Tag Create, remove, input, etc, autolayout use",
+  "version": "0.1.7",
+  "summary": "Dynamic Tag Append, Remove, Insert",
+  "description": "dynamically add, modify, and delete tags, and you can easily change the margins, colors, and fonts of your tags.\nTags are not broken because they are linked with Auto Layout.\nEach time the height of the tag changes, you can bring the height to the delegate",
   "homepage": "https://github.com/pikachu987/Tags",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/pikachu987/Tags.git",
-    "tag": "0.1.0"
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "8.0"

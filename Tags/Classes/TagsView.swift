@@ -366,6 +366,8 @@ public class TagsView: UIView {
         if index < 0 { return nil }
         if self._tagArray.count > index {
             let item = self._tagArray.remove(at: index)
+            item.removeConstraint()
+            item.removeFromSuperview()
             self.redraw()
             return item
         }
@@ -379,6 +381,8 @@ public class TagsView: UIView {
         for (index, element) in self._tagArray.enumerated() {
             if element == button {
                 let item = self._tagArray.remove(at: index)
+                item.removeConstraint()
+                item.removeFromSuperview()
                 self.redraw()
                 return item
             }
@@ -414,7 +418,7 @@ public class TagsView: UIView {
     
     /// RemoveAll Constraint
     private func removeAllConstraint() {
-        for element in self._tagArray {
+        self._tagArray.forEach { (element) in
             element.removeConstraint()
             element.removeFromSuperview()
         }
