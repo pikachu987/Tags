@@ -155,19 +155,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func paddingLeftRightAction(_ sender: UIStepper) {
-        self.tagsView.paddingLeftRight = CGFloat(sender.value)
+        self.tagsView.paddingHorizontal = CGFloat(sender.value)
     }
     
     @IBAction private func paddingTopBottomAction(_ sender: UIStepper) {
-        self.tagsView.paddingTopBottom = CGFloat(sender.value)
+        self.tagsView.paddingVertical = CGFloat(sender.value)
     }
     
     @IBAction private func marginLeftRightAction(_ sender: UIStepper) {
-        self.tagsView.marginLeftRight = CGFloat(sender.value)
+        self.tagsView.marginHorizontal = CGFloat(sender.value)
     }
     
     @IBAction private func marginTopBottomAction(_ sender: UIStepper) {
-        self.tagsView.marginTopBottom = CGFloat(sender.value)
+        self.tagsView.marginVertical = CGFloat(sender.value)
     }
     
     @IBAction private func fgBlackAction(_ sender: UIButton) {

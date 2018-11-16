@@ -24,8 +24,8 @@ import UIKit
 
 /// Button option
 public struct ButtonOptions {
-    public var paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight
-    public var paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom
+    public var paddingHorizontal: CGFloat = TagDefaultOption.paddingHorizontal
+    public var paddingVertical: CGFloat = TagDefaultOption.paddingVertical
     public var layerColor: UIColor
     public var layerRadius: CGFloat
     public var layerWidth: CGFloat
@@ -35,8 +35,8 @@ public struct ButtonOptions {
     public var lineBreakMode: NSLineBreakMode
     
     init(
-        paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight,
-        paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom,
+        paddingHorizontal: CGFloat = TagDefaultOption.paddingHorizontal,
+        paddingVertical: CGFloat = TagDefaultOption.paddingVertical,
         layerColor: UIColor = TagDefaultOption.tagLayerColor,
         layerRadius: CGFloat = TagDefaultOption.tagLayerRadius,
         layerWidth: CGFloat = TagDefaultOption.tagLayerWidth,
@@ -44,8 +44,8 @@ public struct ButtonOptions {
         tagFont: UIFont = TagDefaultOption.tagFont,
         tagBackgroundColor: UIColor = TagDefaultOption.tagBackgroundColor,
         lineBreakMode: NSLineBreakMode = TagDefaultOption.lineBreakMode) {
-        self.paddingLeftRight = paddingLeftRight
-        self.paddingTopBottom = paddingTopBottom
+        self.paddingHorizontal = paddingHorizontal
+        self.paddingVertical = paddingVertical
         self.layerColor = layerColor
         self.layerRadius = layerRadius
         self.layerWidth = layerWidth
@@ -112,12 +112,12 @@ public class TagButton: UIButton {
     /// Set an option.
     public func setEntity(_ options: ButtonOptions) {
         self.setEntity()
-        self.setEntityOptions(options: options)
+        self.setEntityOptions(options)
     }
     
     /// module private set options
-    func setEntityOptions(options: ButtonOptions) {
-        self.contentEdgeInsets = UIEdgeInsetsMake(options.paddingTopBottom, options.paddingLeftRight, options.paddingTopBottom, options.paddingLeftRight)
+    func setEntityOptions(_ options: ButtonOptions) {
+        self.contentEdgeInsets = UIEdgeInsets(top: options.paddingVertical, left: options.paddingHorizontal, bottom: options.paddingVertical, right: options.paddingHorizontal)
         self.layer.borderColor = options.layerColor.cgColor
         self.layer.borderWidth = options.layerWidth
         self.layer.cornerRadius = options.layerRadius
@@ -129,8 +129,8 @@ public class TagButton: UIButton {
     
     
     /// padding set
-    func setEntity(paddingLeftRight: CGFloat, paddingTopBottom: CGFloat) {
-        self.contentEdgeInsets = UIEdgeInsetsMake(paddingTopBottom, paddingLeftRight, paddingTopBottom, paddingLeftRight)
+    func setEntity(paddingHorizontal: CGFloat, paddingVertical: CGFloat) {
+        self.contentEdgeInsets = UIEdgeInsets(top: paddingVertical, left: paddingHorizontal, bottom: paddingVertical, right: paddingHorizontal)
     }
     
     

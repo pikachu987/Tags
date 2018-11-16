@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![License](https://img.shields.io/cocoapods/l/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![Platform](https://img.shields.io/cocoapods/p/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
-[![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 ## Introduce
 
@@ -17,9 +17,14 @@ Each time the height of the tag changes, you can bring the height to the delegat
 
 ## Requirements
 
-`Tags` written in Swift 4. Compatible with iOS 8.0+
+`Tags` written in Swift 4.2. Compatible with iOS 8.0+
 
 ## Installation
+
+
+### Versioning notes
+
+Version 0.1.8 introduces Swift 4 support, 0.2.0 Swift 4.2.
 
 ### Cocoapods
 
@@ -122,10 +127,10 @@ padding & margin
 ![image](./img/margin_padding.png)
 
 ```swift
-tagsView.paddingLeftRight = 6
-tagsView.paddingTopBottom = 4
-tagsView.marginLeftRight = 6
-tagsView.marginTopBottom = 4
+tagsView.paddingHorizontal = 6
+tagsView.paddingVertical = 4
+tagsView.marginHorizontal = 6
+tagsView.marginVertical = 4
 ```
 
 

@@ -35,10 +35,10 @@ public extension TagsDelegate {
 }
 
 public class TagDefaultOption {
-    public static var paddingLeftRight: CGFloat = 6
-    public static let paddingTopBottom: CGFloat = 4
-    public static var marginLeftRight: CGFloat = 6
-    public static var marginTopBottom: CGFloat = 4
+    public static var paddingHorizontal: CGFloat = 6
+    public static let paddingVertical: CGFloat = 4
+    public static var marginHorizontal: CGFloat = 6
+    public static var marginVertical: CGFloat = 4
     public static var tagLayerColor: UIColor = .black
     public static var tagLayerRadius: CGFloat = 6
     public static var tagLayerWidth: CGFloat = 1
@@ -125,7 +125,7 @@ public class TagsView: UIView {
     
     /// Left and right paddings of the button
     @IBInspectable
-    public var paddingLeftRight: CGFloat = TagDefaultOption.paddingLeftRight {
+    public var paddingHorizontal: CGFloat = TagDefaultOption.paddingHorizontal {
         didSet {
             self.redraw()
         }
@@ -133,7 +133,7 @@ public class TagsView: UIView {
     
     /// Top and bottom paddings of the button
     @IBInspectable
-    public var paddingTopBottom: CGFloat = TagDefaultOption.paddingTopBottom {
+    public var paddingVertical: CGFloat = TagDefaultOption.paddingVertical {
         didSet {
             self.redraw()
         }
@@ -141,7 +141,7 @@ public class TagsView: UIView {
     
     /// Left and right margins of the button
     @IBInspectable
-    public var marginLeftRight: CGFloat = TagDefaultOption.marginLeftRight {
+    public var marginHorizontal: CGFloat = TagDefaultOption.marginHorizontal {
         didSet {
             self.redraw()
         }
@@ -149,7 +149,7 @@ public class TagsView: UIView {
     
     /// Top and Bottom margins of the button
     @IBInspectable
-    public var marginTopBottom: CGFloat = TagDefaultOption.marginTopBottom {
+    public var marginVertical: CGFloat = TagDefaultOption.marginVertical {
         didSet {
             self.redraw()
         }
@@ -256,7 +256,7 @@ public class TagsView: UIView {
         button.delegate = self
         button.type = .custom
         button.setEntity()
-        button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
+        button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
         self._tagArray.append(button)
         self.redraw()
         return button
@@ -268,7 +268,7 @@ public class TagsView: UIView {
             button.delegate = self
             button.type = .custom
             button.setEntity()
-            button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
+            button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
             self._tagArray.append(button)
         }
         self.redraw()
@@ -306,7 +306,7 @@ public class TagsView: UIView {
             button.delegate = self
             button.type = .custom
             button.setEntity()
-            button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
+            button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
             self._tagArray[index] = button
             self.redraw()
             return button
@@ -336,7 +336,7 @@ public class TagsView: UIView {
             button.delegate = self
             button.type = .custom
             button.setEntity()
-            button.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
+            button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
             self._tagArray.insert(button, at: index < 0 ? 0 : index)
             self.redraw()
             return button
@@ -454,7 +454,7 @@ public class TagsView: UIView {
         
         self._height = 0
         if !tagArray.isEmpty {
-            self._height += self.marginTopBottom + tagArray[0].size.height + self.marginTopBottom
+            self._height += self.marginVertical + tagArray[0].size.height + self.marginVertical
         }
         
         
@@ -462,9 +462,9 @@ public class TagsView: UIView {
             self.addSubview(element)
             element.index = index
             if element.type == .default || element.type == .last {
-                element.setEntityOptions(options: ButtonOptions(
-                    paddingLeftRight: self.paddingLeftRight,
-                    paddingTopBottom: self.paddingTopBottom,
+                element.setEntityOptions(ButtonOptions(
+                    paddingHorizontal: self.paddingHorizontal,
+                    paddingVertical: self.paddingVertical,
                     layerColor: element.type == .default ? self.tagLayerColor : self.lastTagLayerColor,
                     layerRadius: self.tagLayerRadius,
                     layerWidth: self.tagLayerWidth,
@@ -474,25 +474,25 @@ public class TagsView: UIView {
                     lineBreakMode: self.lineBreakMode
                 ))
             } else {
-                element.setEntity(paddingLeftRight: self.paddingLeftRight, paddingTopBottom: self.paddingTopBottom)
+                element.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
             }
             element.addConstraint()
             
             var width = ceil(element.size.width) +
-                self.marginLeftRight +
-                (buttonsWidth == 0 ? self.marginLeftRight : 0)
+                self.marginHorizontal +
+                (buttonsWidth == 0 ? self.marginHorizontal : 0)
             
             /// Prev Element Trailing, Next Line
             if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width > 0) ) {
                 self.addConstraint(tagArray[index-1].trailingConstraint(
                     self,
-                    constant: self.marginLeftRight
+                    constant: self.marginHorizontal
                 ))
-                width = ceil(element.size.width) + self.marginLeftRight + self.marginLeftRight
+                width = ceil(element.size.width) + self.marginHorizontal + self.marginHorizontal
                 buttonsWidth = 0
                 topItem = tagArray[index-1]
                 leftItem = nil
-                self._height += element.size.height + self.marginTopBottom
+                self._height += element.size.height + self.marginVertical
             }
             
             
@@ -500,21 +500,21 @@ public class TagsView: UIView {
             self.addConstraint(element.leadingConstraint (
                 leftItem ?? self,
                 attribute: leftItem == nil ? .leading : .trailing,
-                constant: self.marginLeftRight
+                constant: self.marginHorizontal
             ))
             self.addConstraint(element.topConstraint (
                 topItem ?? self,
                 attribute: topItem == nil ? .top : .bottom,
-                constant: self.marginTopBottom
+                constant: self.marginVertical
             ))
             if element == tagArray[tagArray.count-1] {
                 self.addConstraint(element.bottomConstraint(
                     self,
-                    constant: self.marginTopBottom
+                    constant: self.marginVertical
                 ))
                 self.addConstraint(element.trailingConstraint(
                     self,
-                    constant: self.marginLeftRight
+                    constant: self.marginHorizontal
                 ))
             }
             
