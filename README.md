@@ -14,6 +14,7 @@ Each time the height of the tag changes, you can bring the height to the delegat
 
 ![demo](./img/tag1.gif)
 ![demo2](./img/tag2.gif)
+![demo2](./img/tag3.gif)
 
 ## Requirements
 
@@ -181,6 +182,13 @@ tagsView.append(TagButton())
 tagsView.append(contentsOf: [TagButton(), TagButton()])
 ```
 
+set
+
+```swift
+tagsView.set(contentsOf: ["Hello", "World"])
+tagsView.set(contentsOf: [TagButton(), TagButton()])
+```
+
 update
 
 ```swift
@@ -200,6 +208,8 @@ remove
 ```swift
 tagsView.remove(0)
 tagsView.remove(TagButton())
+tagsView.removeTags()
+tagsView.removeLastTag()
 tagsView.removeAll()
 ```
 

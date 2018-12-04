@@ -33,9 +33,13 @@ class ViewController: UIViewController {
         self.tagsLabel.numberOfLines = 0
         
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "CustomAdd", style: .plain, target: self, action: #selector(self.tagCustomAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "TableEx", style: .plain, target: self, action: #selector(self.tableViewExample(_:)))
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
+        self.navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "CustomAdd", style: .plain, target: self, action: #selector(self.tagCustomAction(_:))),
+            UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
+        ]
+        
         
         self.makeTagsString()
         
@@ -83,7 +87,11 @@ class ViewController: UIViewController {
             })
     }
     
-    
+    @objc private func tableViewExample(_ sender: UIBarButtonItem) {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TagTableViewController") as! TagTableViewController
+        viewController.tags = self.tagsView.tagTextArray
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
     
     @objc private func tagCustomAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Custom Tag", preferredStyle: .alert)
@@ -214,15 +222,8 @@ class ViewController: UIViewController {
     
 }
 
-
-
-
+// MARK: TagsDelegate
 extension ViewController: TagsDelegate{
-    // MARK: TagsDelegate
-    
-    
-    
-    
     /// Last Tag Touch Action
     func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) {
         let alertController = UIAlertController(title: nil, message: "Append Tag", preferredStyle: .alert)
@@ -325,10 +326,7 @@ extension ViewController: TagsDelegate{
 }
 
 
-
-
-
-
+// MARK: UITextFieldDelegate
 extension ViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let alertController = self.alertController {
