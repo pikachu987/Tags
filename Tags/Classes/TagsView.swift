@@ -117,6 +117,10 @@ public class TagsView: UIView {
     @IBInspectable
     public var tags: String = "" {
         didSet {
+            for element in self._tagArray {
+                element.removeConstraint()
+                element.removeFromSuperview()
+            }
             self._tagArray.removeAll()
             self.append(contentsOf: self.tags.components(separatedBy: ",").filter({ $0 != "" }))
         }
