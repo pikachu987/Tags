@@ -15,7 +15,7 @@ Each time the height of the tag changes, you can bring the height to the delegat
 ![demo](./img/tag1.gif)
 ![demo2](./img/tag2.gif)
 ![demo2](./img/tag3.gif)
-![image](./img/instagram.png)
+![image](./img/ex.png)
 
 ## Requirements
 
