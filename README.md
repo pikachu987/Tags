@@ -301,6 +301,50 @@ button.setEntity(options)
 tagsView.lastTagButton(TagButton())
 ```
 
+## Custom Tag Layout
+
+![image](./img/instagram.png)
+
+```swift
+self.tagsView.tagLayerColor = .clear
+self.tagsView.marginHorizontal = 0
+self.tagsView.paddingHorizontal = 0
+self.tagsView.marginVertical = 0
+self.tagsView.paddingVertical = 1
+
+// id or nickname
+
+let idButton = TagButton()
+idButton.setTitle("pikachu987", for: .normal)
+let options = ButtonOptions(
+layerColor: UIColor.clear,
+tagTitleColor: UIColor.black,
+tagFont: UIFont.boldSystemFont(ofSize: 15),
+tagBackgroundColor: UIColor.clear)
+idButton.setEntity(options)
+
+self.tagsView.append(idButton)
+
+
+// array data
+
+let array = ["Hello Instagram Tag Example", "@Lorem", "ipsum", "@dolor", "sit", "@er", "elit", "@lamet, consectetaur", "@cillium", "@adipisicing", "@pecu, sed", "@do", "@eiusmod", "tempor", "@incididunt", "ut", "@labore", "@et", "@dolore", "@magna", "@aliqua.", "Ut", "@enim", "@ad", "@minim", "@veniam", "@quis", "@nostrud", "@exercitation", "@ullamco", "@laboris", "@nisi", "@ut", "@aliquip", "@ex", "@ea", "@commodo", "@consequat.", "@Duis", "@aute", "@irure", "@dolor", "@in", "@reprehenderit", "@in", "@voluptate", "@velit", "@esse", "@cillum", "@dolore", "@eu", "@fugiat", "@nulla", "@pariatur.", "@Excepteur", "@sint", "@occaecat", "@cupidatat", "@non", "@proident,", "@sunt", "@in", "@culpa", "@qui", "@officia", "@deserunt", "@mollit", "@anim", "@id", "@est", "@laborum.", "@Nam", "@liber", "@te", "@conscient", "@to", "@factor", "@tum", "@poen", "@legum", "@odioque", "@civiuda."]
+
+let tags = array.enumerated().map({ (tag) -> TagButton in
+    let titleColor = tag.element.hasPrefix("@") ? UIColor(red: 33/255, green: 100/255, blue: 255/255, alpha: 1) : .black
+    let tagButton = TagButton()
+    tagButton.setTitle(tag.element, for: .normal)
+    let options = ButtonOptions(
+    layerColor: UIColor.clear,
+    tagTitleColor: titleColor,
+    tagFont: UIFont.systemFont(ofSize: 15),
+    tagBackgroundColor: UIColor.clear)
+    tagButton.setEntity(options)
+    return tagButton
+})
+self.tagsView.append(contentsOf: tags)
+```
+
 
 ## Author
 
