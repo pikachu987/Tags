@@ -86,10 +86,14 @@ public class TagsView: UIView {
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.width = self.frame.width
         self.clipsToBounds = true
         
         self.redraw()
+        self.alpha = 0
+        DispatchQueue.main.async {
+            self.redraw()
+            self.alpha = 1
+        }
     }
     
     public override init(frame: CGRect) {
@@ -463,6 +467,8 @@ public class TagsView: UIView {
     
     /// It is called when you add, delete or modify a button.
     public func redraw() {
+        self.width = self.frame.width
+        
         var topItem: UIView?
         var leftItem: UIView?
         var buttonsWidth: CGFloat = 0
@@ -514,7 +520,7 @@ public class TagsView: UIView {
                 (buttonsWidth == 0 ? self.marginHorizontal : 0)
             
             /// Prev Element Trailing, Next Line
-            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width > 0) ) {
+            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width - 10 > 0) ) {
                 self.addConstraint(tagArray[index-1].trailingConstraint(
                     self,
                     constant: self.marginHorizontal
