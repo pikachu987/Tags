@@ -55,6 +55,7 @@ class TagCell: UITableViewCell {
         
         self.selectionStyle = .none
         self.tagsView.delegate = self
+        self.tagsView.width = UIScreen.main.bounds.width - 20
     }
 }
 

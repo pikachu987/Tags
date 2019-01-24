@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         self.title = "Tags"
         
         self.tagsView.delegate = self
+        self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint.constant*2)
         
         self.heightLabel.text = "height: \(self.tagsView.height)"
         self.widthSlider.minimumValue = 0
@@ -135,7 +136,11 @@ class ViewController: UIViewController {
             
             self.makeTagsString()
         }))
-        
+        alertController.addAction(UIAlertAction(title: "TagViewController Example", style: .default, handler: { (_) in
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TagViewController") as! TagViewController
+            viewController.tags = self.tagsView.tagTextArray
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }))
         
         self.present(alertController, animated: true, completion: nil)
     }
@@ -204,9 +209,6 @@ class ViewController: UIViewController {
     @objc private func sliderAction(_ sender: UISlider) {
         self.leadingConstraint.constant = CGFloat(sender.value)
         self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint.constant*2)
-        
-        /// redraw
-        self.tagsView.redraw()
     }
     
     @IBAction private func paddingLeftRightAction(_ sender: UIStepper) {

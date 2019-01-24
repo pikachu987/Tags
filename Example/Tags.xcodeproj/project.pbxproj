@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18B4244521F95B2A009D298F /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B4244421F95B2A009D298F /* TagViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		155C674DFF3D42F419C52E83 /* Pods-Tags_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Tests/Pods-Tags_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		18B4244421F95B2A009D298F /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		1F4C17C561E6B578725D30C4 /* Tags.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Tags.podspec; path = ../Tags.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2E5CA9A3332B41C2B804D54B /* Pods-Tags_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Example/Pods-Tags_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2FEA6CEEC6ED9FAF48F6E5E1 /* Pods-Tags_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Example/Pods-Tags_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				E0322FFC21B6A4A700DEF337 /* TagTableViewController.swift */,
+				18B4244421F95B2A009D298F /* TagViewController.swift */,
 				E0322FFE21B6A7AE00DEF337 /* TagCell.swift */,
 				E032300021B6A7C200DEF337 /* TagCell.xib */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -334,6 +337,7 @@
 			files = (
 				E0322FFF21B6A7AE00DEF337 /* TagCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				18B4244521F95B2A009D298F /* TagViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				E0322FFD21B6A4A700DEF337 /* TagTableViewController.swift in Sources */,
 			);

@@ -71,7 +71,12 @@ public class TagsView: UIView {
         }
     }
     
-    public var width: CGFloat = UIScreen.main.bounds.width
+    public var width: CGFloat = 0 {
+        didSet {
+            self.redraw()
+        }
+    }
+    
     private var _height: CGFloat = 0
     public var height: CGFloat {
         get {
@@ -88,16 +93,52 @@ public class TagsView: UIView {
         
         self.clipsToBounds = true
         
-        self.redraw()
-        self.alpha = 0
+        let currentWidth = self.frame.width
+        if self.width == 0 {
+            self.width = currentWidth
+        }
+        
         DispatchQueue.main.async {
-            self.redraw()
-            self.alpha = 1
+            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
+                self.width = self.frame.width
+            }
         }
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.clipsToBounds = true
+        
+        if self.width == 0 {
+            self.width = frame.width
+        }
+    }
+    
+    public init(width: CGFloat) {
+        super.init(frame: CGRect(x: 0, y: 0, width: width, height: 0))
+        
+        self.clipsToBounds = true
+        
+        if self.width == 0 {
+            self.width = width
+        }
+    }
+    
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        self.clipsToBounds = true
+        
+        let currentWidth = self.frame.width
+        if self.width == 0 {
+            self.width = currentWidth
+        }
+        DispatchQueue.main.async {
+            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
+                self.width = self.frame.width
+            }
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -467,8 +508,6 @@ public class TagsView: UIView {
     
     /// It is called when you add, delete or modify a button.
     public func redraw() {
-        self.width = self.frame.width
-        
         var topItem: UIView?
         var leftItem: UIView?
         var buttonsWidth: CGFloat = 0
