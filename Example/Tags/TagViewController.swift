@@ -13,30 +13,24 @@ class TagViewController: UIViewController {
     var tags: [String]?
     
     private lazy var tagsView: TagsView = {
-        let view = TagsView() //(width: UIScreen.main.bounds.width)
+        let view = TagsView(width: UIScreen.main.bounds.width - 40)
         self.view.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        let leadingConstraint = NSLayoutConstraint(item: self.view, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let leadingConstraint = NSLayoutConstraint(item: self.view, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: -20)
         self.leadingConstraint = leadingConstraint
         self.view.addConstraints([
             leadingConstraint,
-            NSLayoutConstraint(item: self.view, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 20),
             NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: -120),
             NSLayoutConstraint(item: self.view, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
             ])
         return view
     }()
     
-    @IBOutlet private weak var widthSlider: UISlider!
-    
     private var leadingConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.widthSlider.minimumValue = 0
-        self.widthSlider.maximumValue = Float(UIScreen.main.bounds.width)
-        self.widthSlider.value = 0
         
         self.tagsView.delegate = self
         self.tagsView.marginHorizontal = 2
@@ -64,11 +58,6 @@ class TagViewController: UIViewController {
             )
         )
         return button
-    }
-    
-    @IBAction private func widthAction(_ sender: UISlider) {
-        self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint?.constant ?? 0)
-        self.leadingConstraint?.constant = -CGFloat(sender.value)
     }
 }
 

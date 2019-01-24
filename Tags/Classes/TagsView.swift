@@ -125,7 +125,7 @@ public class TagsView: UIView {
         }
     }
     
-    init() {
+    public init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         self.clipsToBounds = true
@@ -134,7 +134,8 @@ public class TagsView: UIView {
         if self.width == 0 {
             self.width = currentWidth
         }
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.layoutIfNeeded()
             if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
                 self.width = self.frame.width
             }
@@ -514,7 +515,7 @@ public class TagsView: UIView {
         
         self.removeAllConstraint()
         
-        if self._tagArray.isEmpty && self.lastTag == nil && self.lastTagButton == nil {
+        if (self._tagArray.isEmpty && self.lastTag == nil && self.lastTagButton == nil) || self.width < (self.marginHorizontal + self.paddingHorizontal) + 5 {
             self._height = 0
             self.delegate?.tagsChangeHeight(self, height: 0)
             let heightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0)
