@@ -12,25 +12,23 @@ import Tags
 class TagViewController: UIViewController {
     var tags: [String]?
     
-    private lazy var tagsView: TagsView = {
+    private let tagsView: TagsView = {
         let view = TagsView(width: UIScreen.main.bounds.width - 40)
-        self.view.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        let leadingConstraint = NSLayoutConstraint(item: self.view, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: -20)
-        self.leadingConstraint = leadingConstraint
-        self.view.addConstraints([
-            leadingConstraint,
-            NSLayoutConstraint(item: self.view, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 20),
-            NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: -120),
-            NSLayoutConstraint(item: self.view, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .bottom, multiplier: 1, constant: 0),
-            ])
         return view
     }()
     
-    private var leadingConstraint: NSLayoutConstraint?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.addSubview(self.tagsView)
+        let itemView = self.view as Any
+        self.view.addConstraints([
+            NSLayoutConstraint(item: itemView, attribute: .trailing, relatedBy: .equal, toItem: self.tagsView, attribute: .trailing, multiplier: 1, constant: 20),
+            NSLayoutConstraint(item: itemView, attribute: .leading, relatedBy: .equal, toItem: self.tagsView, attribute: .leading, multiplier: 1, constant: -20),
+            NSLayoutConstraint(item: itemView, attribute: .top, relatedBy: .equal, toItem: self.tagsView, attribute: .top, multiplier: 1, constant: -(self.navigationController?.navigationBar.frame.height ?? 0) - UIApplication.shared.statusBarFrame.height),
+            NSLayoutConstraint(item: itemView, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: self.tagsView, attribute: .bottom, multiplier: 1, constant: 0),
+            ])
         
         self.tagsView.delegate = self
         self.tagsView.marginHorizontal = 2

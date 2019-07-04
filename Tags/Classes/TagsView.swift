@@ -29,9 +29,9 @@ public protocol TagsDelegate: class {
 }
 
 public extension TagsDelegate {
-    public func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) { }
-    public func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) { }
-    public func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat) { }
+    func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat) { }
 }
 
 public class TagDefaultOption {
@@ -370,6 +370,9 @@ public class TagsView: UIView {
             button.type = .custom
             button.setEntity()
             button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
+            self._tagArray[index].isHidden = true
+            self._tagArray[index].removeConstraint()
+            self._tagArray[index].removeFromSuperview()
             self._tagArray[index] = button
             self.redraw()
             return button
@@ -385,6 +388,9 @@ public class TagsView: UIView {
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
+            self._tagArray[index].isHidden = true
+            self._tagArray[index].removeConstraint()
+            self._tagArray[index].removeFromSuperview()
             self._tagArray[index] = button
             self.redraw()
             return button
@@ -429,6 +435,7 @@ public class TagsView: UIView {
         if index < 0 { return nil }
         if self._tagArray.count > index {
             let item = self._tagArray.remove(at: index)
+            item.isHidden = true
             item.removeConstraint()
             item.removeFromSuperview()
             self.redraw()
@@ -444,6 +451,7 @@ public class TagsView: UIView {
         for (index, element) in self._tagArray.enumerated() {
             if element == button {
                 let item = self._tagArray.remove(at: index)
+                item.isHidden = true
                 item.removeConstraint()
                 item.removeFromSuperview()
                 self.redraw()
@@ -456,6 +464,7 @@ public class TagsView: UIView {
     /// Remove Tag
     public func removeTags() {
         self._tagArray.forEach { (element) in
+            element.isHidden = true
             element.removeConstraint()
             element.removeFromSuperview()
         }
