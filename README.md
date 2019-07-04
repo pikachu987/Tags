@@ -27,7 +27,9 @@ Each time the height of the tag changes, you can bring the height to the delegat
 ### Versioning notes
 
 Version 0.3.0 introduces Swift 5.0 support
+
 Version 0.2.4 introduces Swift 4.2 support
+
 Version 0.1.8 introduces Swift 4.0 support
 
 ### Cocoapods
