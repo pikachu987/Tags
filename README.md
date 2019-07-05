@@ -35,6 +35,13 @@ it, simply add the following line to your Podfile:
 pod 'Tags'
 ```
 
+### Swift Package Manager
+
+To integrate `Tags` via [SPM](https://swift.org/package-manager/) into your Xcode 11 project specify it in Project > Swift Packages:
+```
+https://github.com/pikachu987/Tags
+```
+
 ## Usage
 
 
