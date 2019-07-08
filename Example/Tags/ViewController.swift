@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         self.title = "Tags"
         
         self.tagsView.delegate = self
+        self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint.constant*2)
         
         self.heightLabel.text = "height: \(self.tagsView.height)"
         self.widthSlider.minimumValue = 0
@@ -33,9 +34,13 @@ class ViewController: UIViewController {
         self.tagsLabel.numberOfLines = 0
         
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "CustomAdd", style: .plain, target: self, action: #selector(self.tagCustomAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Example", style: .plain, target: self, action: #selector(self.example(_:)))
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
+        self.navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "CustomAdd", style: .plain, target: self, action: #selector(self.tagCustomAction(_:))),
+            UIBarButtonItem(title: "LastButton", style: .plain, target: self, action: #selector(self.lastBarButtonAction(_:)))
+        ]
+        
         
         self.makeTagsString()
         
@@ -83,7 +88,62 @@ class ViewController: UIViewController {
             })
     }
     
-    
+    @objc private func example(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "UITableView Example", style: .default, handler: { (_) in
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TagTableViewController") as! TagTableViewController
+            viewController.tags = self.tagsView.tagTextArray
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }))
+        
+        // instagram
+        alertController.addAction(UIAlertAction(title: "Instagram Example", style: .default, handler: { (_) in
+            self.tagsView.removeAll()
+            
+            self.tagsView.tagLayerColor = .clear
+            self.tagsView.marginHorizontal = 0
+            self.tagsView.paddingHorizontal = 0
+            self.tagsView.marginVertical = 0
+            self.tagsView.paddingVertical = 1
+            
+            let idButton = TagButton()
+            idButton.setTitle("pikachu987", for: .normal)
+            let options = ButtonOptions(
+                layerColor: UIColor.clear,
+                tagTitleColor: UIColor.black,
+                tagFont: UIFont.boldSystemFont(ofSize: 15),
+                tagBackgroundColor: UIColor.clear)
+            idButton.setEntity(options)
+            
+            self.tagsView.append(idButton)
+            
+            let array = ["Hello Instagram Tag Example", "@Lorem", "ipsum", "@dolor", "sit", "@er", "elit", "@lamet, consectetaur", "@cillium", "@adipisicing", "@pecu, sed", "@do", "@eiusmod", "tempor", "@incididunt", "ut", "@labore", "@et", "@dolore", "@magna", "@aliqua.", "Ut", "@enim", "@ad", "@minim", "@veniam", "@quis", "@nostrud", "@exercitation", "@ullamco", "@laboris", "@nisi", "@ut", "@aliquip", "@ex", "@ea", "@commodo", "@consequat.", "@Duis", "@aute", "@irure", "@dolor", "@in", "@reprehenderit", "@in", "@voluptate", "@velit", "@esse", "@cillum", "@dolore", "@eu", "@fugiat", "@nulla", "@pariatur.", "@Excepteur", "@sint", "@occaecat", "@cupidatat", "@non", "@proident,", "@sunt", "@in", "@culpa", "@qui", "@officia", "@deserunt", "@mollit", "@anim", "@id", "@est", "@laborum.", "@Nam", "@liber", "@te", "@conscient", "@to", "@factor", "@tum", "@poen", "@legum", "@odioque", "@civiuda."]
+            
+            let tags = array.enumerated().map({ (tag) -> TagButton in
+                let titleColor = tag.element.hasPrefix("@") ? UIColor(red: 33/255, green: 100/255, blue: 255/255, alpha: 1) : .black
+                let tagButton = TagButton()
+                tagButton.setTitle(tag.element, for: .normal)
+                let options = ButtonOptions(
+                    layerColor: UIColor.clear,
+                    tagTitleColor: titleColor,
+                    tagFont: UIFont.systemFont(ofSize: 15),
+                    tagBackgroundColor: UIColor.clear)
+                tagButton.setEntity(options)
+                return tagButton
+            })
+            self.tagsView.append(contentsOf: tags)
+            
+            self.makeTagsString()
+        }))
+        alertController.addAction(UIAlertAction(title: "TagViewController Example", style: .default, handler: { (_) in
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TagViewController") as! TagViewController
+            viewController.tags = self.tagsView.tagTextArray
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     @objc private func tagCustomAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Custom Tag", preferredStyle: .alert)
@@ -149,9 +209,6 @@ class ViewController: UIViewController {
     @objc private func sliderAction(_ sender: UISlider) {
         self.leadingConstraint.constant = CGFloat(sender.value)
         self.tagsView.width = UIScreen.main.bounds.width - (self.leadingConstraint.constant*2)
-        
-        /// redraw
-        self.tagsView.redraw()
     }
     
     @IBAction private func paddingLeftRightAction(_ sender: UIStepper) {
@@ -214,15 +271,8 @@ class ViewController: UIViewController {
     
 }
 
-
-
-
+// MARK: TagsDelegate
 extension ViewController: TagsDelegate{
-    // MARK: TagsDelegate
-    
-    
-    
-    
     /// Last Tag Touch Action
     func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) {
         let alertController = UIAlertController(title: nil, message: "Append Tag", preferredStyle: .alert)
@@ -325,10 +375,7 @@ extension ViewController: TagsDelegate{
 }
 
 
-
-
-
-
+// MARK: UITextFieldDelegate
 extension ViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let alertController = self.alertController {

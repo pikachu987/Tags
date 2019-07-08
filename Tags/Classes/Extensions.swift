@@ -66,6 +66,13 @@ extension UIView {
             attribute: .bottom,
             multiplier: 1,
             constant: constant
-        )
+        ).priority(990)
+    }
+}
+
+extension NSLayoutConstraint {
+    func priority(_ value: CGFloat) -> NSLayoutConstraint {
+        self.priority = UILayoutPriority(Float(value))
+        return self
     }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagCell" rowHeight="153" id="KX7-aE-VTT" customClass="TagCell" customModule="Tags_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KX7-aE-VTT" id="XCZ-vP-oro">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="152.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pt8-rQ-5YY" customClass="TagsView" customModule="Tags">
+                        <rect key="frame" x="10" y="10" width="355" height="132.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pt8-rQ-5YY" firstAttribute="top" secondItem="XCZ-vP-oro" secondAttribute="top" constant="10" id="Azn-rs-3jt"/>
+                    <constraint firstItem="pt8-rQ-5YY" firstAttribute="leading" secondItem="XCZ-vP-oro" secondAttribute="leading" constant="10" id="U9o-3H-b3c"/>
+                    <constraint firstAttribute="trailing" secondItem="pt8-rQ-5YY" secondAttribute="trailing" constant="10" id="VQn-8R-h1i"/>
+                    <constraint firstAttribute="bottom" secondItem="pt8-rQ-5YY" secondAttribute="bottom" priority="500" constant="10" id="bh9-um-Hib"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tagsView" destination="pt8-rQ-5YY" id="wwd-Vi-nh3"/>
+            </connections>
+            <point key="canvasLocation" x="-15.199999999999999" y="64.31784107946028"/>
+        </tableViewCell>
+    </objects>
+</document>

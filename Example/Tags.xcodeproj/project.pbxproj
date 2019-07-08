@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18B4244521F95B2A009D298F /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B4244421F95B2A009D298F /* TagViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		73DEB3BB9458910B4A33255A /* Pods_Tags_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0C454723DF28EAF42CBEF2 /* Pods_Tags_Example.framework */; };
 		85FD9AA7C83FA556F515768E /* Pods_Tags_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8366BE715BA5D659913C2C22 /* Pods_Tags_Tests.framework */; };
+		E0322FFD21B6A4A700DEF337 /* TagTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0322FFC21B6A4A700DEF337 /* TagTableViewController.swift */; };
+		E0322FFF21B6A7AE00DEF337 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0322FFE21B6A7AE00DEF337 /* TagCell.swift */; };
+		E032300121B6A7C200DEF337 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E032300021B6A7C200DEF337 /* TagCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		155C674DFF3D42F419C52E83 /* Pods-Tags_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Tests/Pods-Tags_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		18B4244421F95B2A009D298F /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		1F4C17C561E6B578725D30C4 /* Tags.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Tags.podspec; path = ../Tags.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2E5CA9A3332B41C2B804D54B /* Pods-Tags_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Example/Pods-Tags_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2FEA6CEEC6ED9FAF48F6E5E1 /* Pods-Tags_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Example/Pods-Tags_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +52,9 @@
 		6A66C24C7B29ED1EE2A003B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		8366BE715BA5D659913C2C22 /* Pods_Tags_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tags_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BF62685956D7040200C72AA /* Pods-Tags_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tags_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tags_Tests/Pods-Tags_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0322FFC21B6A4A700DEF337 /* TagTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewController.swift; sourceTree = "<group>"; };
+		E0322FFE21B6A7AE00DEF337 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		E032300021B6A7C200DEF337 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,10 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				E0322FFC21B6A4A700DEF337 /* TagTableViewController.swift */,
+				18B4244421F95B2A009D298F /* TagViewController.swift */,
+				E0322FFE21B6A7AE00DEF337 /* TagCell.swift */,
+				E032300021B6A7C200DEF337 /* TagCell.xib */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -223,7 +235,7 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Tags" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -245,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E032300121B6A7C200DEF337 /* TagCell.xib in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -322,8 +335,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0322FFF21B6A7AE00DEF337 /* TagCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				18B4244521F95B2A009D298F /* TagViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				E0322FFD21B6A4A700DEF337 /* TagTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +495,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -494,7 +510,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -515,7 +531,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -532,7 +548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

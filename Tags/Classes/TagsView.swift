@@ -29,9 +29,9 @@ public protocol TagsDelegate: class {
 }
 
 public extension TagsDelegate {
-    public func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) { }
-    public func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) { }
-    public func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat) { }
+    func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    func tagsLastTagAction(_ tagsView: TagsView, tagButton: TagButton) { }
+    func tagsChangeHeight(_ tagsView: TagsView, height: CGFloat) { }
 }
 
 public class TagDefaultOption {
@@ -71,7 +71,12 @@ public class TagsView: UIView {
         }
     }
     
-    public var width: CGFloat = UIScreen.main.bounds.width
+    public var width: CGFloat = 0 {
+        didSet {
+            self.redraw()
+        }
+    }
+    
     private var _height: CGFloat = 0
     public var height: CGFloat {
         get {
@@ -86,14 +91,55 @@ public class TagsView: UIView {
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.width = self.frame.width
         self.clipsToBounds = true
         
-        self.redraw()
+        let currentWidth = self.frame.width
+        if self.width == 0 {
+            self.width = currentWidth
+        }
+        
+        DispatchQueue.main.async {
+            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
+                self.width = self.frame.width
+            }
+        }
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.clipsToBounds = true
+        
+        if self.width == 0 {
+            self.width = frame.width
+        }
+    }
+    
+    public init(width: CGFloat) {
+        super.init(frame: CGRect(x: 0, y: 0, width: width, height: 0))
+        
+        self.clipsToBounds = true
+        
+        if self.width == 0 {
+            self.width = width
+        }
+    }
+    
+    public init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        self.clipsToBounds = true
+        
+        let currentWidth = self.frame.width
+        if self.width == 0 {
+            self.width = currentWidth
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.layoutIfNeeded()
+            if self.width == 0 || (self.width != 0 && self.frame.width != currentWidth) {
+                self.width = self.frame.width
+            }
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -213,6 +259,9 @@ public class TagsView: UIView {
     @IBInspectable
     public var lastTag: String? = nil {
         didSet {
+            self.lastTagButton?.removeConstraint()
+            self.lastTagButton?.removeFromSuperview()
+            self.lastTagButton = nil
             if let text = self.lastTag {
                 let button = TagButton(type: .system)
                 button.delegate = self
@@ -221,7 +270,6 @@ public class TagsView: UIView {
                 self.lastTagButton = button
                 self.redraw()
             } else {
-                self.lastTagButton = nil
                 self.redraw()
             }
         }
@@ -301,6 +349,17 @@ public class TagsView: UIView {
         self.redraw()
     }
     
+    /// set TagButtons
+    public func set(contentsOf: [TagButton]) {
+        self.removeAll()
+        self.append(contentsOf: contentsOf)
+    }
+    
+    /// set a Strings as a TagButtons
+    public func set(contentsOf: [String]) {
+        self.removeAll()
+        self.append(contentsOf: contentsOf)
+    }
     
     /// Change the TagButton at index
     @discardableResult
@@ -311,6 +370,9 @@ public class TagsView: UIView {
             button.type = .custom
             button.setEntity()
             button.setEntity(paddingHorizontal: self.paddingHorizontal, paddingVertical: self.paddingVertical)
+            self._tagArray[index].isHidden = true
+            self._tagArray[index].removeConstraint()
+            self._tagArray[index].removeFromSuperview()
             self._tagArray[index] = button
             self.redraw()
             return button
@@ -326,6 +388,9 @@ public class TagsView: UIView {
             let button = TagButton(type: .system)
             button.delegate = self
             button.setEntity(title: text)
+            self._tagArray[index].isHidden = true
+            self._tagArray[index].removeConstraint()
+            self._tagArray[index].removeFromSuperview()
             self._tagArray[index] = button
             self.redraw()
             return button
@@ -370,6 +435,7 @@ public class TagsView: UIView {
         if index < 0 { return nil }
         if self._tagArray.count > index {
             let item = self._tagArray.remove(at: index)
+            item.isHidden = true
             item.removeConstraint()
             item.removeFromSuperview()
             self.redraw()
@@ -385,6 +451,7 @@ public class TagsView: UIView {
         for (index, element) in self._tagArray.enumerated() {
             if element == button {
                 let item = self._tagArray.remove(at: index)
+                item.isHidden = true
                 item.removeConstraint()
                 item.removeFromSuperview()
                 self.redraw()
@@ -394,11 +461,10 @@ public class TagsView: UIView {
         return nil
     }
     
-    
-    
-    /// RemoveAll
-    public func removeAll() {
-        for element in self._tagArray {
+    /// Remove Tag
+    public func removeTags() {
+        self._tagArray.forEach { (element) in
+            element.isHidden = true
             element.removeConstraint()
             element.removeFromSuperview()
         }
@@ -409,16 +475,30 @@ public class TagsView: UIView {
         self.redraw()
     }
     
+    /// RemoveAll
+    public func removeAll() {
+        self.removeTags()
+        self.removeLastTag()
+    }
+    
+    
+    /// Remove Last Tag
+    public func removeLastTag() {
+        self.lastTag = nil
+        self.redraw()
+    }
+    
     
     /// Last Custom Button
     public func lastTagButton(_ button: TagButton) {
+        self.lastTagButton?.removeConstraint()
+        self.lastTagButton?.removeFromSuperview()
+        self.lastTagButton = nil
         button.delegate = self
         button.type = .lastCustom
         self.lastTagButton = button
         self.redraw()
     }
-    
-    
     
     /// RemoveAll Constraint
     private func removeAllConstraint() {
@@ -444,10 +524,12 @@ public class TagsView: UIView {
         
         self.removeAllConstraint()
         
-        if self._tagArray.isEmpty && self.lastTag == nil {
+        if (self._tagArray.isEmpty && self.lastTag == nil && self.lastTagButton == nil) || self.width < (self.marginHorizontal + self.paddingHorizontal) + 5 {
             self._height = 0
             self.delegate?.tagsChangeHeight(self, height: 0)
-            self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0))
+            let heightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 0)
+            heightConstraint.priority = UILayoutPriority(950)
+            self.addConstraint(heightConstraint)
             return
         }
         
@@ -487,7 +569,7 @@ public class TagsView: UIView {
                 (buttonsWidth == 0 ? self.marginHorizontal : 0)
             
             /// Prev Element Trailing, Next Line
-            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width > 0) ) {
+            if !( buttonsWidth == 0 || (floor(self.width) - buttonsWidth - width - 10 > 0) ) {
                 self.addConstraint(tagArray[index-1].trailingConstraint(
                     self,
                     constant: self.marginHorizontal
@@ -532,10 +614,8 @@ public class TagsView: UIView {
     
 }
 
-
+// MARK: TagButtonDelegate
 extension TagsView: TagButtonDelegate {
-    // MARK: TagButtonDelegate
-    
     /// button touchUpInside Action
     func tagButtonAction(_ tagButton: TagButton, type: TagButtonType) {
         if type == .last || type == .lastCustom {
