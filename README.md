@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![License](https://img.shields.io/cocoapods/l/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![Platform](https://img.shields.io/cocoapods/p/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
-[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 ## Introduce
 
@@ -14,17 +14,23 @@ Each time the height of the tag changes, you can bring the height to the delegat
 
 ![demo](./img/tag1.gif)
 ![demo2](./img/tag2.gif)
+![demo2](./img/tag3.gif)
+![image](./img/ex.png)
 
 ## Requirements
 
-`Tags` written in Swift 4.2. Compatible with iOS 8.0+
+`Tags` written in Swift 5.0. Compatible with iOS 8.0+
 
 ## Installation
 
 
 ### Versioning notes
 
-Version 0.1.8 introduces Swift 4 support, 0.2.0 Swift 4.2.
+Version 0.3.0 introduces Swift 5.0 support
+
+Version 0.2.4 introduces Swift 4.2 support
+
+Version 0.1.8 introduces Swift 4.0 support
 
 ### Cocoapods
 
@@ -33,6 +39,12 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'Tags'
+
+# For Swift 4.2 (no longer maintained), use:
+# pod 'Tags', '~> 0.2.4'
+
+# For Swift 4.0 (no longer maintained), use:
+# pod 'Tags', '~> 0.1.8'
 ```
 
 ## Usage
@@ -181,6 +193,13 @@ tagsView.append(TagButton())
 tagsView.append(contentsOf: [TagButton(), TagButton()])
 ```
 
+set
+
+```swift
+tagsView.set(contentsOf: ["Hello", "World"])
+tagsView.set(contentsOf: [TagButton(), TagButton()])
+```
+
 update
 
 ```swift
@@ -200,6 +219,8 @@ remove
 ```swift
 tagsView.remove(0)
 tagsView.remove(TagButton())
+tagsView.removeTags()
+tagsView.removeLastTag()
 tagsView.removeAll()
 ```
 
@@ -289,6 +310,48 @@ let options = ButtonOptions(
 )
 button.setEntity(options)
 tagsView.lastTagButton(TagButton())
+```
+
+## Custom Tag Layout
+
+```swift
+self.tagsView.tagLayerColor = .clear
+self.tagsView.marginHorizontal = 0
+self.tagsView.paddingHorizontal = 0
+self.tagsView.marginVertical = 0
+self.tagsView.paddingVertical = 1
+
+// id or nickname
+
+let idButton = TagButton()
+idButton.setTitle("pikachu987", for: .normal)
+let options = ButtonOptions(
+layerColor: UIColor.clear,
+tagTitleColor: UIColor.black,
+tagFont: UIFont.boldSystemFont(ofSize: 15),
+tagBackgroundColor: UIColor.clear)
+idButton.setEntity(options)
+
+self.tagsView.append(idButton)
+
+
+// array data
+
+let array = ["Hello Instagram Tag Example", "@Lorem", "ipsum", "@dolor", "sit", "@er", "elit", "@lamet, consectetaur", "@cillium", "@adipisicing", "@pecu, sed", "@do", "@eiusmod", "tempor", "@incididunt", "ut", "@labore", "@et", "@dolore", "@magna", "@aliqua.", "Ut", "@enim", "@ad", "@minim", "@veniam", "@quis", "@nostrud", "@exercitation", "@ullamco", "@laboris", "@nisi", "@ut", "@aliquip", "@ex", "@ea", "@commodo", "@consequat.", "@Duis", "@aute", "@irure", "@dolor", "@in", "@reprehenderit", "@in", "@voluptate", "@velit", "@esse", "@cillum", "@dolore", "@eu", "@fugiat", "@nulla", "@pariatur.", "@Excepteur", "@sint", "@occaecat", "@cupidatat", "@non", "@proident,", "@sunt", "@in", "@culpa", "@qui", "@officia", "@deserunt", "@mollit", "@anim", "@id", "@est", "@laborum.", "@Nam", "@liber", "@te", "@conscient", "@to", "@factor", "@tum", "@poen", "@legum", "@odioque", "@civiuda."]
+
+let tags = array.enumerated().map({ (tag) -> TagButton in
+    let titleColor = tag.element.hasPrefix("@") ? UIColor(red: 33/255, green: 100/255, blue: 255/255, alpha: 1) : .black
+    let tagButton = TagButton()
+    tagButton.setTitle(tag.element, for: .normal)
+    let options = ButtonOptions(
+    layerColor: UIColor.clear,
+    tagTitleColor: titleColor,
+    tagFont: UIFont.systemFont(ofSize: 15),
+    tagBackgroundColor: UIColor.clear)
+    tagButton.setEntity(options)
+    return tagButton
+})
+self.tagsView.append(contentsOf: tags)
 ```
 
 
