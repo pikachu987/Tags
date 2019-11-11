@@ -476,6 +476,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.3.1;
 				MODULEMAP_FILE = "Target Support Files/Tags/Tags.modulemap";
 				PRODUCT_MODULE_NAME = Tags;
 				PRODUCT_NAME = Tags;
@@ -701,6 +702,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.3.1;
 				MODULEMAP_FILE = "Target Support Files/Tags/Tags.modulemap";
 				PRODUCT_MODULE_NAME = Tags;
 				PRODUCT_NAME = Tags;
