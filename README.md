@@ -47,6 +47,13 @@ pod 'Tags'
 # pod 'Tags', '~> 0.1.8'
 ```
 
+### Swift Package Manager
+
+To integrate `Tags` via [SPM](https://swift.org/package-manager/) into your Xcode 11 project specify it in Project > Swift Packages:
+```
+https://github.com/pikachu987/Tags
+```
+
 ## Usage
 
 
