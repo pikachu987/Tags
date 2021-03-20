@@ -1,8 +1,10 @@
 # Tags
 
+[![CI Status](https://img.shields.io/travis/pikachu987/Tags.svg?style=flat)](https://travis-ci.org/pikachu987/Tags)
 [![Version](https://img.shields.io/cocoapods/v/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![License](https://img.shields.io/cocoapods/l/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
 [![Platform](https://img.shields.io/cocoapods/p/Tags.svg?style=flat)](http://cocoapods.org/pods/Tags)
+![](https://img.shields.io/badge/Supported-iOS9%20%7C%20OSX%2010.9-4BC51D.svg?style=flat-square)
 [![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 ## Introduce
@@ -19,7 +21,7 @@ Each time the height of the tag changes, you can bring the height to the delegat
 
 ## Requirements
 
-`Tags` written in Swift 5.0. Compatible with iOS 8.0+
+`Tags` written in Swift 5.0. Compatible with iOS 9.0+
 
 ## Installation
 
